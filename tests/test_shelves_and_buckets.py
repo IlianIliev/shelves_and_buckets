@@ -51,11 +51,11 @@ def test_int_interval_shelf():
 
 
 def test_named_shelf():
-    shelf = NamedShelf(
+    shelf = NamedShelf([
         ('one', 'Bucket 1'),
         ('two', 'Bucket 2'),
         ('three', 'Bucket 3'),
-    )
+    ])
 
     assert shelf.get('one') == 'Bucket 1'
 
@@ -64,6 +64,16 @@ def test_named_shelf():
 
     shelf = NamedShelf()
     shelf.add('abc', 'ABC')
+
+
+def test_named_shelf_from_dict():
+    shelf = NamedShelf({
+        'one': 'Bucket 1',
+        'two': 'Bucket 2',
+        'three': 'Bucket 3',
+    })
+
+    assert shelf.get('one') == 'Bucket 1'
 
 
 def test_multi_dimensional_shelf():
@@ -77,10 +87,10 @@ def test_multi_dimensional_shelf():
         ([11, 20], 'Bucket B-2'),
     ])
 
-    named_shelf = NamedShelf(
+    named_shelf = NamedShelf([
         ('shelf a', shelf_a),
         ('shelf b', shelf_b)
-    )
+    ])
 
     assert named_shelf.get_multi('shelf a', 15) == 'Bucket A-2'
     assert named_shelf.get_multi('shelf b', 10) == 'Bucket B-1'

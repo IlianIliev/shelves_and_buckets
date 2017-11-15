@@ -58,10 +58,15 @@ class IntIntervalShelf(IntervalShelf):
 
 
 class NamedShelf(AbstractShelf):
-    def __init__(self, *args):
+    def __init__(self, data=None):
         self.buckets = {}
-        if args:
-            self.buckets = dict(list(args))
+        if not data:
+            return
+
+        if isinstance(data, dict):
+            self.buckets = data
+        elif isinstance(data, (list, tuple)):
+            self.buckets = dict(data)
 
     def get(self, key):
         try:
