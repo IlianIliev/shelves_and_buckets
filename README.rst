@@ -20,6 +20,20 @@ Shelves and Buckets
 
 Shelves and buckets is a small package for easier work with grouped data or data ranges. It originates from the need to easily find data in multidimensional space using intervals. Lets look at the following examples:
 
+* Free software: MIT license
+* Documentation: https://shelves-and-buckets.readthedocs.io.
+
+
+Features
+--------
+
+Interval shelves are using the intervals_ package
+
+.. _intervals: https://pypi.python.org/pypi/intervals
+
+ - IntIntervalShelf - interval boundaries are integers
+ - NamedShelf - takes a dictionary as input and behaves similarly but could be combined with other shelves
+
 
 Examples
 --------
@@ -81,21 +95,6 @@ Example::
     'average'
 
 
-* Free software: MIT license
-* Documentation: https://shelves-and-buckets.readthedocs.io.
-
-
-Features
---------
-
-Interval shelves are using the intervals_ package
-
-.. _intervals: https://pypi.python.org/pypi/intervals
-
- - IntervalShelf -
- - IntIntervalShelf - interval boundaries are integers
- - NamedShelf - takes a dictionary as input and behaves similarly but could be combined with other shelves
-
 TODOs
 -----
 
@@ -112,3 +111,6 @@ This package was created with Cookiecutter_ and the `audreyr/cookiecutter-pypack
 .. _Cookiecutter: https://github.com/audreyr/cookiecutter
 .. _`audreyr/cookiecutter-pypackage`: https://github.com/audreyr/cookiecutter-pypackage
 
+This package uses Intervals_ by `Konsta Vesterinen`_
+
+.. _`Konsta Vesterinen`: https://github.com/kvesteri
