@@ -24,6 +24,12 @@ class AbstractShelf(ABC):
 
         return shelf
 
+    def __getitem__(self, item):
+        return self.get(item)
+
+    def __setitem__(self, key, value):
+        self.add(key, value)
+
 
 class IntervalShelf(AbstractShelf):
     interval_class = Interval

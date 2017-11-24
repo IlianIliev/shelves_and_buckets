@@ -35,7 +35,6 @@ def test_add_to_shelf():
 
 def test_int_interval_shelf():
     shelf = IntIntervalShelf([
-        # ('[, 0)', 'Bucket 1'),
         ([0, 10], 'Bucket 1'),
         ('(10, 20]', 'Bucket 2'),
         ('[30, )', 'Bucket 3'),
@@ -135,3 +134,31 @@ def test_real_life_example():
 
     # male, 24 years old, 42 pushups
     assert pushups.get_multi('male', 24, 42) == 'average'
+
+
+def test_int_shelf_with_indexing():
+    shelf = IntIntervalShelf([
+        ([0, 10], 'Bucket 1'),
+        ('(10, 20]', 'Bucket 2'),
+    ])
+
+    shelf['[30, )'] = 'Bucket 3'
+
+    assert shelf[5] == 'Bucket 1'
+    assert shelf[35] == 'Bucket 3'
+    with pytest.raises(BucketDoesNotExists):
+        assert shelf[-5]
+
+
+def test_named_shelf_with_indexing():
+    shelf = NamedShelf([
+        ('a', 'Bucket 1'),
+        ('b', 'Bucket 2'),
+    ])
+
+    shelf['c'] = 'Bucket 3'
+
+    assert shelf['a'] == 'Bucket 1'
+    assert shelf['c'] == 'Bucket 3'
+    with pytest.raises(BucketDoesNotExists):
+        assert shelf['e']
