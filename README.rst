@@ -95,6 +95,15 @@ Example::
     'average'
 
 
+Shelves also support usage with indexing for adding and getting buckets::
+
+    shelf = IntIntervalShelf()
+    shelf[[0, 10]] = 'Bucket A'
+    shelf[[11, 20]] = 'Bucket B'
+    >>> shelf[5]
+    'Bucket A'
+
+
 TODOs
 -----
 
