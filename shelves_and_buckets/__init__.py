@@ -5,7 +5,7 @@ from .shelves_and_buckets import AbstractShelf, IntervalShelf, IntIntervalShelf,
 
 __author__ = """Ilian Stefkov Iliev"""
 __email__ = 'ilian@ilian.io'
-__version__ = '0.1.1'
+__version__ = '0.1.2'
 
 
 __all__ = [
