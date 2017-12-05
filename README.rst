@@ -32,6 +32,7 @@ Interval shelves are using the intervals_ package
 .. _intervals: https://pypi.python.org/pypi/intervals
 
  - IntIntervalShelf - interval boundaries are integers
+ - FloatIntervalShelf - interval boundaries are floats
  - NamedShelf - takes a dictionary as input and behaves similarly but could be combined with other shelves
 
 

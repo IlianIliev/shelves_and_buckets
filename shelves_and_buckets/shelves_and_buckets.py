@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from abc import ABC, abstractmethod
-from intervals import Interval, IntInterval
+from intervals import Interval, IntInterval, FloatInterval
 
 from .exceptions import BucketDoesNotExists, UnknownDimension
 
@@ -61,6 +61,10 @@ class IntervalShelf(AbstractShelf):
 
 class IntIntervalShelf(IntervalShelf):
     interval_class = IntInterval
+
+
+class FloatIntervalShelf(IntervalShelf):
+    interval_class = FloatInterval
 
 
 class NamedShelf(AbstractShelf):

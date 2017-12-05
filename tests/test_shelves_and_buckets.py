@@ -6,7 +6,7 @@
 import pytest
 
 
-from shelves_and_buckets import IntervalShelf, IntIntervalShelf, NamedShelf
+from shelves_and_buckets import IntervalShelf, IntIntervalShelf, NamedShelf, FloatIntervalShelf
 from shelves_and_buckets.exceptions import BucketDoesNotExists, UnknownDimension
 
 
@@ -162,3 +162,13 @@ def test_named_shelf_with_indexing():
     assert shelf['c'] == 'Bucket 3'
     with pytest.raises(BucketDoesNotExists):
         assert shelf['e']
+
+
+def test_float_shelf():
+    shelf = FloatIntervalShelf([
+        ('[0, 4.5]', 'Bucket 1'),
+        ('(4.5, 5.6]', 'Bucket 2'),
+    ])
+
+    assert shelf[2.3] == 'Bucket 1'
+    assert shelf[4.8] == 'Bucket 2'
