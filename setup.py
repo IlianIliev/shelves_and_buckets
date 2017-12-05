@@ -25,7 +25,7 @@ test_requirements = [
 
 setup(
     name='shelves_and_buckets',
-    version='0.1.2',
+    version='0.1.3',
     description="Shelves and buckets for easier work with grouped data",
     long_description=readme + '\n\n' + history,
     author="Ilian Stefkov Iliev",
