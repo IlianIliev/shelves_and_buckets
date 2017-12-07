@@ -12,7 +12,7 @@ with open('HISTORY.rst') as history_file:
     history = history_file.read()
 
 requirements = [
-    'intervals==0.8.0',
+    'intervals',
 ]
 
 setup_requirements = [
