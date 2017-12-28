@@ -2,7 +2,7 @@
 from abc import ABC, abstractmethod
 from intervals import Interval, IntInterval, FloatInterval
 
-from .exceptions import BucketDoesNotExists, UnknownDimension
+from .exceptions import BucketDoesNotExists, UnknownDimension, IntervalsOverlap
 
 
 class AbstractShelf(ABC):
@@ -55,6 +55,10 @@ class IntervalShelf(AbstractShelf):
             interval = self.interval_class(bounds)
         else:
             interval = self.interval_class.from_string(bounds)
+
+        for existing_interval, _ in self.buckets:
+            if interval.is_connected(existing_interval) and not (interval & existing_interval).empty:
+                raise IntervalsOverlap('Interval {} overlaps interval {}'.format(interval, existing_interval))
 
         self.buckets.append((interval, bucket))
 
