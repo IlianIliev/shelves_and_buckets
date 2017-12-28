@@ -8,3 +8,7 @@ class BucketDoesNotExists(DoesNotExists):
 
 class UnknownDimension(DoesNotExists):
     pass
+
+
+class IntervalsOverlap(Exception):
+    pass
