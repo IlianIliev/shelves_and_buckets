@@ -7,7 +7,9 @@ import pytest
 
 
 from shelves_and_buckets import IntervalShelf, IntIntervalShelf, NamedShelf, FloatIntervalShelf
-from shelves_and_buckets.exceptions import BucketDoesNotExists, UnknownDimension, IntervalsOverlap
+from shelves_and_buckets.exceptions import (
+    BucketDoesNotExists, UnknownDimension, IntervalsOverlap, IntervalsDoesNotConnect
+)
 
 
 def test_interval_shelf():
@@ -184,3 +186,22 @@ def test_check_for_overlapping_intervals():
 
     with pytest.raises(IntervalsOverlap):
         shelf.add('[4, 4.5]', 'Bucket 1')
+
+
+def test_no_gaps():
+    shelf = FloatIntervalShelf()
+
+    shelf.add('[0, 2)', 'Bucket A')
+    with pytest.raises(IntervalsDoesNotConnect):
+        shelf.add('[3, 4]', 'Bucket B')
+
+    with pytest.raises(IntervalsDoesNotConnect):
+        shelf.add('(2, 10]', 'Bucket B')
+
+
+def test_allow_gaps():
+    shelf = FloatIntervalShelf(allow_gaps=True)
+
+    shelf.add('[0, 2)', 'Bucket A')
+
+    shelf.add('[10, 20]', 'Bucket B')

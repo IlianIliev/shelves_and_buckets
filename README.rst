@@ -105,11 +105,34 @@ Shelves also support usage with indexing for adding and getting buckets::
     'Bucket A'
 
 
+Intervals are not allowed to overlap. In such cases and `IntervalsOverlap` exception is raised::
+
+    from shelves_and_buckets import FloatIntervalShelf
+    shelf = FloatIntervalShelf()
+    shelf.add('[0, 2)', 'Bucket A')
+    shelf.add('[1, 2)', 'Bucket B')
+    >>> Traceback (most recent call last):
+    >>>   File "<stdin>", line 1, in <module>
+    >>>   File ".../shelves_and_buckets.py", line 63, in add
+    >>>     raise IntervalsOverlap('Interval {} overlaps interval {}'.format(interval, existing_interval))
+    >>> shelves_and_buckets.exceptions.IntervalsOverlap: Interval [1.0, 2.0) overlaps interval [0.0, 2.0)
+
+
+By default you are not allowed to have gaps between the intervals. In such case an `IntervalsDoesNotConnect` exception is raised::
+
+    shelf = FloatIntervalShelf()
+    shelf.add('[0, 2)', 'Bucket A')
+    shelf.add('[3, 4]', 'Bucket B')
+    >>> Traceback (most recent call last):
+    >>>   File "<stdin>", line 1, in <module>
+    >>>   File ".../shelves_and_buckets.py", line 70, in add
+    >>>     'Interval {} does not connect with interval {}'.format(interval, last_interval))
+    >>> shelves_and_buckets.exceptions.IntervalsDoesNotConnect: Interval [3.0, 4.0] does not connect with interval [0.0, 2.0)
+
+
 TODOs
 -----
 
-    - Add check for intervals overlap
-    - Add option to avoid holes between intervals
     - Add option to pass directly Interval object when creating bucket
     - Consider using bisect for faster search in intervals http://www.ilian.io/working-with-intervals-in-python/
 
