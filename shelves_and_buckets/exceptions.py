@@ -12,3 +12,7 @@ class UnknownDimension(DoesNotExists):
 
 class IntervalsOverlap(Exception):
     pass
+
+
+class IntervalsDoesNotConnect(Exception):
+    pass

@@ -2,7 +2,7 @@
 from abc import ABC, abstractmethod
 from intervals import Interval, IntInterval, FloatInterval
 
-from .exceptions import BucketDoesNotExists, UnknownDimension, IntervalsOverlap
+from .exceptions import BucketDoesNotExists, UnknownDimension, IntervalsOverlap, IntervalsDoesNotConnect
 
 
 class AbstractShelf(ABC):
@@ -34,8 +34,10 @@ class AbstractShelf(ABC):
 class IntervalShelf(AbstractShelf):
     interval_class = Interval
 
-    def __init__(self, buckets=None):
+    def __init__(self, buckets=None, allow_gaps=False):
         self.buckets = []
+
+        self.allow_gaps = allow_gaps
 
         if not buckets:
             return
@@ -59,6 +61,13 @@ class IntervalShelf(AbstractShelf):
         for existing_interval, _ in self.buckets:
             if interval.is_connected(existing_interval) and not (interval & existing_interval).empty:
                 raise IntervalsOverlap('Interval {} overlaps interval {}'.format(interval, existing_interval))
+
+        if self.buckets and not self.allow_gaps:
+            # we check if the intervals connect before adding the new one
+            last_interval = self.buckets[-1][0]
+            if not interval.is_connected(last_interval):
+                raise IntervalsDoesNotConnect(
+                    'Interval {} does not connect with interval {}'.format(interval, last_interval))
 
         self.buckets.append((interval, bucket))
 
