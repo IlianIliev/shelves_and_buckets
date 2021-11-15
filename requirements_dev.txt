@@ -1,5 +1,5 @@
 docutils==0.12  # fixes issue with make docs
-pip==8.1.2
+pip==21.1
 bumpversion==0.5.3
 wheel==0.29.0
 watchdog==0.8.3
